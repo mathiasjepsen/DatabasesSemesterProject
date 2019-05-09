@@ -17,15 +17,88 @@ export default class Home extends React.Component {
     // }
 
     render() {
+        const rowsDummy = [
+            { city: "Copenhagen", title: "The Necronomicon", author: "Lovro Biljeskovic", geolocation: "64.127573, -21.903975" },
+            { city: "Copenhagen", title: "The Necronomicon", author: "Lovro Biljeskovic", geolocation: "64.127573, -21.903975" },
+            { city: "Copenhagen", title: "The Necronomicon", author: "Lovro Biljeskovic", geolocation: "64.127573, -21.903975" }
+        ]
+
         return (
-            <div style={{ width: "100%", height: "100vh", position: "relative" }}>
-                <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-                    <iframe src="../test-map.html" height="500" width="500"></iframe>
+            <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 80 }}>
+                        <label>MySQL</label>
+                        <input type="radio" defaultChecked />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 80 }}>
+                        <label>MongoDB</label>
+                        <input type="radio" />
+                    </div>
                 </div>
+                <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: 10 }}>
+                    <div style={styles.headerRowContainer}>
+                        <label>City</label>
+                        <input style={styles.inputField} type="text" />
+                    </div>
+                    <div style={styles.headerRowContainer}>
+                        <label>Book title</label>
+                        <input style={styles.inputField} type="text" />
+                    </div>
+                    <div style={styles.headerRowContainer}>
+                        <label>Author</label>
+                        <input style={styles.inputField} type="text" />
+                    </div>
+                    <div style={styles.headerRowContainer}>
+                        <label>Geolocation</label>
+                        <input style={styles.inputField} type="text" />
+                    </div>
+                </div>
+                <table style={{ borderCollapse: "collapse", marginTop: 18, marginRight: 10, marginLeft: 10 }} border="1">
+                    <thead>
+                        <tr>
+                            <th>City</th>
+                            <th>Book title</th>
+                            <th>Author</th>
+                            <th>Geolocation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {buildTableBody(rowsDummy)}
+                    </tbody>
+                </table>
             </div>
         )
     }
 }
+
+const buildTableBody = (rows) => {
+    return rows.map((row, index) => {
+        return (
+            <tr key={index}>
+                <td>{row.city}</td>
+                <td>{row.title}</td>
+                <td>{row.author}</td>
+                <td>{row.geolocation}</td>
+            </tr>
+        )
+    })
+}
+
+const styles = {
+    inputField: {
+        width: 200,
+        height: 24,
+        marginTop: 2
+    },
+    headerRowContainer: {
+        display: "flex",
+        flexDirection: "column",
+        textAlign: "left",
+        fontFamily: "helvetica"
+    }
+}
+
+//                <iframe src="../test-map.html" height="500" width="500"></iframe>
 
 // const MessageBox = (props) => {
 //     const { onLogin, successfullySubmitted } = props
